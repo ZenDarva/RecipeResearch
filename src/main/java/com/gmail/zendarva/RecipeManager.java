@@ -2,6 +2,8 @@ package com.gmail.zendarva;
 
 import com.gmail.zendarva.domain.Research;
 import com.gmail.zendarva.recipes.LockableRecipe;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -41,5 +43,17 @@ public class RecipeManager {
             ForgeRegistries.RECIPES.register(newRecipe);
         }
 
+    }
+
+    public static Research getResearchForItem(ItemStack target) {
+        for (Research research : RecipeResearch.configManager.researchList) {
+            Item item = Item.getByNameOrId(research.itemToScan);
+            if (item == null)
+                return null;
+            ItemStack stack = new ItemStack(item);
+            if (stack.isItemEqual(target))
+                return research;
+        }
+        return null;
     }
 }

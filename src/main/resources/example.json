@@ -9,7 +9,7 @@
 //    ],
 //    //The name of the item that will unlock these recipes when scanned.
 //    "itemToScan": "minecraft:string",
-//    //Required power to complete scanning.  This is in RF currently.
-//    "requiredPower": 0
+//    //Required power to complete scanning.  This is just # of ticks required currently.
+//    "requiredPower": 500
 //  }
 //]

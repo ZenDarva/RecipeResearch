@@ -10,5 +10,5 @@ import java.util.List;
 public class Research {
     public List<String> controlledRecipes;
     public String itemToScan;
-    long powerRequired;
+    public int requiredPower;
 }
