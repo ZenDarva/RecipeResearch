@@ -19,6 +19,9 @@ public class RecipeManager {
         RecipeResearch.configManager.researchList.forEach(this::applyResearch);
     }
 
+    public static List<LockableRecipe> lockedRecipes = new LinkedList<>();
+
+
     private void applyResearch(Research research){
         List<IRecipe> recipesToWrap = new LinkedList<>();
 
@@ -34,7 +37,9 @@ public class RecipeManager {
         for (IRecipe recipe : recipesToWrap) {
             RegistryManager.ACTIVE.getRegistry(GameData.RECIPES).remove(recipe.getRegistryName());
             LockableRecipe newRecipe = new LockableRecipe(recipe, research);
+            lockedRecipes.add(newRecipe);
             ForgeRegistries.RECIPES.register(newRecipe);
         }
+
     }
 }

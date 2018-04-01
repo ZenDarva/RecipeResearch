@@ -16,9 +16,11 @@ public class LockableRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements
 
 
     private final IRecipe recipe;
+    public final Research lockedBehind;
 
     public LockableRecipe(IRecipe recipe, Research lockedBehind) {
         this.recipe = recipe;
+        this.lockedBehind = lockedBehind;
         this.setRegistryName("reciperesearch", recipe.getRegistryName().getResourcePath());
     }
 
