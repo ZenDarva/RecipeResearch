@@ -1,0 +1,16 @@
+[
+{
+  "modid": "reciperesearch",
+  "name": "Recipe Research",
+  "description": "A mod that allows you to setup a tech tree in minecraft.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["zendarva"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

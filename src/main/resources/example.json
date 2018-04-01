@@ -1,0 +1,15 @@
+////The file should start with an array of recipes to control.
+////This file is entirely commented out,  Obviously, you'll want to uncomment anything you want to actually work.
+//[
+//  {
+//    //Controlled recipes go in this array.  The string should contain the name of the recipe.
+//    "controlledRecipes": [
+//      "minecraft:arrow",
+//      "minecraft:bow"
+//    ],
+//    //The name of the item that will unlock these recipes when scanned.
+//    "itemToScan": "minecraft:string",
+//    //Required power to complete scanning.  This is in RF currently.
+//    "requiredPower": 0
+//  }
+//]
