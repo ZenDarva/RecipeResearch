@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by James on 3/31/2018.
@@ -33,6 +34,10 @@ public class ConfigManager {
         } catch (IOException e) {
             RecipeResearch.logger.error("Unable to load json config files. {}", e);
         }
+    }
+
+    public Optional<Research> getResearch(String lockedBehind){
+        return researchList.stream().filter(f->f.itemToScan.toLowerCase().equals(lockedBehind.toLowerCase())).findFirst();
     }
 
 

@@ -43,9 +43,9 @@ public class LockableWrapper implements IShapedCraftingRecipeWrapper {
     @Override
     @SideOnly(Side.CLIENT)
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        minecraft.currentScreen.drawHoveringText("Restricted!",-7,70);
+        minecraft.currentScreen.drawHoveringText("Restricted!",-7,75);
         Item item = Item.getByNameOrId(recipe.lockedBehind.itemToScan);
         ItemStack stack = new ItemStack(item);
-        minecraft.currentScreen.drawHoveringText("Research "+ stack.getDisplayName(),-7,90 );
+        minecraft.currentScreen.drawHoveringText("Research "+ stack.getDisplayName(),-7,95 );
     }
 }
