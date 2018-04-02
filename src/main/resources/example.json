@@ -1,15 +1,20 @@
-////The file should start with an array of recipes to control.
-////This file is entirely commented out,  Obviously, you'll want to uncomment anything you want to actually work.
-//[
-//  {
-//    //Controlled recipes go in this array.  The string should contain the name of the recipe.
-//    "controlledRecipes": [
-//      "minecraft:arrow",
-//      "minecraft:bow"
-//    ],
-//    //The name of the item that will unlock these recipes when scanned.
-//    "itemToScan": "minecraft:string",
-//    //Required power to complete scanning.  This is just # of ticks required currently.
-//    "requiredPower": 500
-//  }
-//]
+//The file should start with an array of recipes to control.
+[
+  {
+    //Controlled recipes go in this array.  The string should contain the name of the recipe.
+    "controlledRecipes": [
+      "minecraft:arrow",
+      "minecraft:bow"
+    ],
+    //The name of the item that will unlock these recipes when scanned.
+    "itemToScan": "minecraft:string",
+    //Required power to complete scanning.  This is just # of ticks required currently.
+    //If a research doesn't exist, then it will take 1000 ticks when the item is scanned.
+    "requiredPower": 500,
+    //commandToRun will be run by the reciperesearch fake player, with op permissions.  %player% will be replaced with
+    //the name of the player to trigger the research.  This is optional.
+    "commandToRun":"/say %player% just discovered bows!",
+    //Chance the research will succeed.  If not included will default to 100.
+    "successChance":100
+  }
+]

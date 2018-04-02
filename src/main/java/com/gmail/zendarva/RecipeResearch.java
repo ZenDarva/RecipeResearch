@@ -6,10 +6,13 @@ import com.gmail.zendarva.capabilities.LearnedRecipesStorage;
 import com.gmail.zendarva.command.LearnedCommand;
 import com.gmail.zendarva.handlers.CapabilityHandler;
 import com.gmail.zendarva.proxy.CommonProxy;
+import com.mojang.authlib.GameProfile;
 import net.minecraft.command.ServerCommandManager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -18,6 +21,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.registries.RegistryManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.UUID;
 
 /**
  * Created by James on 3/31/2018.
@@ -29,6 +34,7 @@ public class RecipeResearch {
     public static Logger logger;
     public static ConfigManager configManager;
     public static RecipeManager recipeManager;
+    public static EntityPlayer fakePlayer;
 
     @Mod.Instance
     public static RecipeResearch instance;
@@ -58,6 +64,7 @@ public class RecipeResearch {
         CapabilityManager.INSTANCE.register(ILearnedRecipes.class, new LearnedRecipesStorage(), LearnedRecipes.class);
 
         proxy.preInit(event);
+
     }
 
     @Mod.EventHandler
@@ -70,5 +77,7 @@ public class RecipeResearch {
     public void serverStart(FMLServerStartingEvent event) {
         MinecraftServer server = event.getServer();
         ((ServerCommandManager) server.getCommandManager()).registerCommand(new LearnedCommand());
+        GameProfile profile = new GameProfile(UUID.fromString("4408bd02-361f-11e8-b467-0ed5f89f718b"), "[reciperesearch]");
+        fakePlayer = new CommandableFakePlayer(server.getWorld(0),profile);
     }
 }

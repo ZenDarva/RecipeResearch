@@ -3,6 +3,7 @@ package com.gmail.zendarva.tile;
 import com.gmail.zendarva.ModBlocks;
 import com.gmail.zendarva.RecipeManager;
 import com.gmail.zendarva.domain.Research;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -13,6 +14,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 /**
  * Created by James on 4/1/2018.
@@ -102,8 +104,12 @@ public class EntityScanner extends TileEntity implements ITickable {
         if (research == null){
             return ItemStack.EMPTY;
         }
-        ItemStack stack = new ItemStack(ModBlocks.researchItem);
-        ModBlocks.researchItem.setResearch(research,stack);
-        return stack;
+        Random random = new Random(System.currentTimeMillis());
+        if (random.nextInt(100) <= research.successChance) {
+            ItemStack stack = new ItemStack(ModBlocks.researchItem);
+            ModBlocks.researchItem.setResearch(research, stack);
+            return stack;
+        }
+        return ItemStack.EMPTY;
     }
 }

@@ -11,4 +11,6 @@ public class Research {
     public List<String> controlledRecipes;
     public String itemToScan;
     public int requiredPower;
+    public String commandToRun= null;
+    public int successChance = 100;
 }
