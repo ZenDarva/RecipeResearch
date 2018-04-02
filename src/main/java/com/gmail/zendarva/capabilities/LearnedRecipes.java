@@ -31,4 +31,9 @@ public class LearnedRecipes implements ILearnedRecipes {
     public void set(ILearnedRecipes cap) {
         this.researches=cap.learnedResearches();
     }
+
+    @Override
+    public void clear() {
+        researches.clear();
+    }
 }

@@ -70,8 +70,6 @@ public class EntityScanner extends TileEntity implements ITickable {
 
     @Override
     public void update() {
-        if (this.getWorld().isRemote)
-                return;
         if (!workingOn.isEmpty() && progress < maxProgress){
             progress++;
             return;
@@ -79,7 +77,10 @@ public class EntityScanner extends TileEntity implements ITickable {
         if (progress >= maxProgress && !workingOn.isEmpty() && inventory.getStackInSlot(1).isEmpty()){
             progress = 0;
             maxProgress=0;
-            //We need to create the research result before we do this, but we don't have the code to do it yet.
+            if (this.getWorld().isRemote) {
+                workingOn=ItemStack.EMPTY;
+                return;
+            }
             inventory.setStackInSlot(1,getResearchOutput());
             workingOn=ItemStack.EMPTY;
             return;

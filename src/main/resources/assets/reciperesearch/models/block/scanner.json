@@ -1,6 +1,12 @@
 {
-  "parent": "block/cube_all",
+  "parent": "block/cube",
   "textures": {
-    "all": "reciperesearch:blocks/scanner"
+    "particle": "reciperesearch:blocks/scannerside",
+    "down": "reciperesearch:blocks/scannerside",
+    "up": "reciperesearch:blocks/scannertop",
+    "east": "reciperesearch:blocks/scannerside",
+    "west": "reciperesearch:blocks/scannerside",
+    "north": "reciperesearch:blocks/scannerside",
+    "south": "reciperesearch:blocks/scannerside"
   }
 }

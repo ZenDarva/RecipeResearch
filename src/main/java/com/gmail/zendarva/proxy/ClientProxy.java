@@ -2,6 +2,8 @@ package com.gmail.zendarva.proxy;
 
 import com.gmail.zendarva.ModBlocks;
 import com.gmail.zendarva.RecipeResearch;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -28,6 +30,13 @@ public class ClientProxy extends CommonProxy {
 
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event){
+        ModBlocks.scanner.initModel();
+        ModBlocks.researchItem.initModel();
+    }
 
+    @Override
+    public EntityPlayer getPlayer() {
+        EntityPlayer player = Minecraft.getMinecraft().player;
+        return player;
     }
 }

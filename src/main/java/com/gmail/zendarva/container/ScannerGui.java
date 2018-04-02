@@ -12,16 +12,30 @@ import net.minecraft.util.ResourceLocation;
 public class ScannerGui extends GuiContainer {
 
     private static final ResourceLocation background = new ResourceLocation(RecipeResearch.MODID, "textures/gui/scanner.png");
+    private final EntityScanner scanner;
+
     public ScannerGui(Container scannerContainer, EntityScanner scanner) {
         super(scannerContainer);
-//        xSize=180;
-//        ySize=152;
+        this.scanner = scanner;
+        ySize = 165;
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float v, int i, int i1) {
         mc.getTextureManager().bindTexture(background);
         drawTexturedModalRect(guiLeft,guiTop,0,0,xSize,ySize);
-        this.renderHoveredToolTip(i,i1);
+        if (scanner.progress > 0) {
+            float percent = (float)scanner.progress/(float)scanner.maxProgress;
+            int pixel = (int)(percent * 100);
+            drawTexturedModalRect(guiLeft + 34, guiTop + 16, 0, 175, pixel, 9);
+        }
+
     }
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX,mouseY);
+    }
+
 }

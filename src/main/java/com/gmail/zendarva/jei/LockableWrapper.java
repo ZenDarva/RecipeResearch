@@ -1,5 +1,6 @@
 package com.gmail.zendarva.jei;
 
+import com.gmail.zendarva.RecipeResearch;
 import com.gmail.zendarva.recipes.LockableRecipe;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.wrapper.IShapedCraftingRecipeWrapper;

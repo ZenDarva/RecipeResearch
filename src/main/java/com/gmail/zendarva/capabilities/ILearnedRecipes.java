@@ -14,4 +14,6 @@ public interface ILearnedRecipes {
     public boolean knowsResearch(Research research);
 
     public void set(ILearnedRecipes cap);
+
+    public void clear();
 }

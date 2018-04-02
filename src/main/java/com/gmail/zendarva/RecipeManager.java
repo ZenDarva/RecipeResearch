@@ -56,4 +56,12 @@ public class RecipeManager {
         }
         return null;
     }
+
+    public static ItemStack getStackForName(String name) {
+        Item item = Item.getByNameOrId(name);
+        if (item == null)
+            return ItemStack.EMPTY;
+        ItemStack stack = new ItemStack(item);
+        return stack;
+    }
 }

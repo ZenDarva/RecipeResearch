@@ -3,8 +3,11 @@ package com.gmail.zendarva;
 import com.gmail.zendarva.capabilities.ILearnedRecipes;
 import com.gmail.zendarva.capabilities.LearnedRecipes;
 import com.gmail.zendarva.capabilities.LearnedRecipesStorage;
+import com.gmail.zendarva.command.LearnedCommand;
 import com.gmail.zendarva.handlers.CapabilityHandler;
 import com.gmail.zendarva.proxy.CommonProxy;
+import net.minecraft.command.ServerCommandManager;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Mod;
@@ -12,6 +15,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.registries.RegistryManager;
 import org.apache.logging.log4j.Logger;
 
@@ -62,12 +66,9 @@ public class RecipeResearch {
     }
 
 
-    private void printData(String stage){
-        System.out.println("Active in stage: " + stage);
-        RegistryManager.ACTIVE.takeSnapshot(false).keySet().stream().forEach(f->System.out.println(f));
-        System.out.println("Frozen in stage: " + stage);
-        RegistryManager.FROZEN.takeSnapshot(false).keySet().stream().forEach(f->System.out.println(f));
-        System.out.println("Vanilla in stage: " + stage);
-        RegistryManager.VANILLA.takeSnapshot(false).keySet().stream().forEach(f->System.out.println(f));
+    @Mod.EventHandler
+    public void serverStart(FMLServerStartingEvent event) {
+        MinecraftServer server = event.getServer();
+        ((ServerCommandManager) server.getCommandManager()).registerCommand(new LearnedCommand());
     }
 }
