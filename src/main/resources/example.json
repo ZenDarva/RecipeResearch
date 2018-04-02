@@ -16,5 +16,13 @@
     "commandToRun":"/say %player% just discovered bows!",
     //Chance the research will succeed.  If not included will default to 100.
     "successChance":100
+  },
+  {
+    "controlledRecipes": [
+      "minecraft:dispenser"
+    ],
+    "itemToScan": "minecraft:bow",
+    "requiredPower":600,
+    "successChance":90
   }
 ]
