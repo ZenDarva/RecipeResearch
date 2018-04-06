@@ -109,7 +109,7 @@ public class ResearchItem extends Item {
             }
             learnedRecipes.learnResearch(research);
             stack.shrink(1);
-            player.sendMessage(new TextComponentString("You learn about the applications of " + getMyResearchItemName(stack)));
+            player.sendMessage(new TextComponentString("You learn about the applications of " + research.));
             if (research.commandToRun != null && !player.world.isRemote){
                 String modifiedCommandToRun = research.commandToRun.replace("%player%", player.getName());
                 player.world.getMinecraftServer().commandManager.executeCommand(RecipeResearch.fakePlayer,modifiedCommandToRun);

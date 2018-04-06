@@ -18,6 +18,7 @@ import java.util.Optional;
 public class ConfigManager {
 
     List<Research> researchList = new LinkedList<>();
+    List<Research> erroredResearches = new LinkedList<>();
     Gson gson = new Gson();
     public ConfigManager(File minecraftConfigDir){
         File myConfigDir = new File(minecraftConfigDir,"recipeResearch");
@@ -31,13 +32,26 @@ public class ConfigManager {
             }
         try {
             readFiles(myConfigDir);
+            researchList.stream().forEach(this::verifyResearch);
         } catch (IOException e) {
             RecipeResearch.logger.error("Unable to load json config files. {}", e);
         }
     }
 
+    private void verifyResearch(Research research) {
+        if (research.researchName == null){
+            RecipeResearch.logger.info("Research for item {} is missing a name.", research.itemToScan);
+            erroredResearches.add(research);
+            return;
+        }
+        if (research.itemToScan == null || research.itemToScan.isEmpty()){
+            RecipeResearch.logger.info("Research {} has no items to scan, and is therefore unobtainable.", research.itemToScan);
+            erroredResearches.add(research);
+        }
+    }
+
     public Optional<Research> getResearch(String lockedBehind){
-        return researchList.stream().filter(f->f.itemToScan.toLowerCase().equals(lockedBehind.toLowerCase())).findFirst();
+        return researchList.stream().filter(f->f.itemToScan.contains(lockedBehind)).findFirst();
     }
 
 
