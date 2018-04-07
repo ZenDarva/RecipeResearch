@@ -1,5 +1,6 @@
 package com.gmail.zendarva.item;
 
+import com.gmail.zendarva.ConfigManager;
 import com.gmail.zendarva.RecipeManager;
 import com.gmail.zendarva.RecipeResearch;
 import com.gmail.zendarva.capabilities.ILearnedRecipes;
@@ -16,6 +17,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -42,8 +45,18 @@ public class ResearchItem extends Item {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        return super.getItemStackDisplayName(stack) + " " + getMyResearchItemName(stack);
+        ItemStack target = RecipeManager.getStackForName(getMyResearch(stack));
+        if (target.isEmpty()){
+            return "Incomplete Research";
+        }
+        Research research = RecipeManager.getResearchForItem(target);
+        if (research == null){
+            return "Damaged Research";
+        }
+        //TODO: Replace with client side translator.  Rather stupid.
+        return I18n.translateToLocal(research.researchName).trim();
     }
+
 
     private String getMyResearch(ItemStack stack){
         if (stack.getTagCompound() == null){
@@ -109,7 +122,7 @@ public class ResearchItem extends Item {
             }
             learnedRecipes.learnResearch(research);
             stack.shrink(1);
-            player.sendMessage(new TextComponentString("You learn about the applications of " + research.));
+            player.sendMessage(new TextComponentTranslation(research.getDiscoveryString()));
             if (research.commandToRun != null && !player.world.isRemote){
                 String modifiedCommandToRun = research.commandToRun.replace("%player%", player.getName());
                 player.world.getMinecraftServer().commandManager.executeCommand(RecipeResearch.fakePlayer,modifiedCommandToRun);

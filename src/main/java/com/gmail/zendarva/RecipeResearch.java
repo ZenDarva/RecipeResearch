@@ -3,25 +3,31 @@ package com.gmail.zendarva;
 import com.gmail.zendarva.capabilities.ILearnedRecipes;
 import com.gmail.zendarva.capabilities.LearnedRecipes;
 import com.gmail.zendarva.capabilities.LearnedRecipesStorage;
+import com.gmail.zendarva.client.LanguageSource;
 import com.gmail.zendarva.command.LearnedCommand;
 import com.gmail.zendarva.handlers.CapabilityHandler;
 import com.gmail.zendarva.proxy.CommonProxy;
 import com.mojang.authlib.GameProfile;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.IResourcePack;
 import net.minecraft.command.ServerCommandManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.registries.RegistryManager;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -42,6 +48,19 @@ public class RecipeResearch {
     @SidedProxy(clientSide="com.gmail.zendarva.proxy.ClientProxy",serverSide="com.gmail.zendarva.proxy.CommonProxy")
     public static CommonProxy proxy;
 
+    public static Object languageSource;
+
+
+    public RecipeResearch() {
+        if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
+            registerLanguageHandler();
+        }
+    }
+    @SideOnly(Side.CLIENT)
+    private void registerLanguageHandler(){
+        languageSource = new LanguageSource();
+        ((List<IResourcePack>) ReflectionHelper.getPrivateValue(Minecraft.class, Minecraft.getMinecraft(), "field_110449_ao", "defaultResourcePacks")).add((IResourcePack) languageSource);
+    }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
@@ -51,13 +70,9 @@ public class RecipeResearch {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        System.out.println("path:" + event.getSuggestedConfigurationFile().getParentFile());
         logger = event.getModLog();
         configManager = new ConfigManager(event.getSuggestedConfigurationFile().getParentFile());
-
         recipeManager = new RecipeManager();
-
-//        RegistryManager.ACTIVE.getRegistry(GameData.RECIPES).getEntries().stream().forEach(f->System.out.println(f.getKey()));
 
         MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
 
@@ -80,4 +95,5 @@ public class RecipeResearch {
         GameProfile profile = new GameProfile(UUID.fromString("4408bd02-361f-11e8-b467-0ed5f89f718b"), "[reciperesearch]");
         fakePlayer = new CommandableFakePlayer(server.getWorld(0),profile);
     }
+
 }

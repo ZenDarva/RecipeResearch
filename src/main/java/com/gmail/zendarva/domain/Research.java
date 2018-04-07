@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,16 +13,15 @@ import java.util.Map;
  */
 public class Research {
     public String researchName;
-    public Map<String, String> localizedDisplayName;
+    public List<LanguageData> displayName;
     public List<String> controlledRecipes;
-    public List<String> itemToScan;
+    public String itemToScan;
     public int requiredPower;
     public String commandToRun= null;
     public int successChance = 100;
     public List<String> requiredResearch;
 
-
-    public String getDisplayName(){
-        Minecraft.getMinecraft().gameSettings.language
+    public String getDiscoveryString(){
+        return researchName+".discovery.string";
     }
 }

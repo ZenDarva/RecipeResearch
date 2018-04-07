@@ -3,6 +3,7 @@ package com.gmail.zendarva;
 import com.gmail.zendarva.domain.Research;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import sun.misc.IOUtils;
 
 import java.io.*;
@@ -17,10 +18,14 @@ import java.util.Optional;
  */
 public class ConfigManager {
 
-    List<Research> researchList = new LinkedList<>();
+    public List<Research> researchList = new LinkedList<>();
     List<Research> erroredResearches = new LinkedList<>();
-    Gson gson = new Gson();
+    Gson gson;
+
+
     public ConfigManager(File minecraftConfigDir){
+        GsonBuilder builder =new GsonBuilder();
+        gson = builder.create();
         File myConfigDir = new File(minecraftConfigDir,"recipeResearch");
         if (!myConfigDir.exists())
             try {

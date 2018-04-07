@@ -1,6 +1,9 @@
 //The file should start with an array of recipes to control.
 [
   {
+    //This is the name of the research, it will be used for dependencies, and for localization, so
+    //prefix it with research:
+    "researchName":"research:String",
     //Controlled recipes go in this array.  The string should contain the name of the recipe.
     "controlledRecipes": [
       "minecraft:arrow",
@@ -23,6 +26,11 @@
     ],
     "itemToScan": "minecraft:bow",
     "requiredPower":600,
-    "successChance":90
+    "successChance":90,
+    "displayName": {
+      "en_us": "String Research",
+      "other": "blah blah blah"
+    }
+
   }
 ]
