@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class RecipeResearchPlugin implements IModPlugin {
     @Override
     public void register(IModRegistry registry) {
-        List<LockableWrapper> wrappedLockables = RecipeManager.lockedRecipes.stream().map(f->new LockableWrapper(f)).collect(Collectors.toList());
+        List<LockableWrapper> wrappedLockables = RecipeManager.lockedRecipes.stream().map(LockableWrapper::new).collect(Collectors.toList());
         registry.addRecipes(wrappedLockables, VanillaRecipeCategoryUid.CRAFTING);
     }
 

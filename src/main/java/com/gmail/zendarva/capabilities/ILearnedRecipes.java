@@ -9,11 +9,10 @@ import java.util.List;
  */
 public interface ILearnedRecipes {
 
-    public List<String> learnedResearches();
-    public void learnResearch(Research research);
-    public boolean knowsResearch(Research research);
+    List<String> learnedResearches();
+    void learnResearch(Research research);
+    boolean knowsResearch(Research research);
 
-    public void set(ILearnedRecipes cap);
-
-    public void clear();
+    void set(ILearnedRecipes cap);
+    void clear();
 }

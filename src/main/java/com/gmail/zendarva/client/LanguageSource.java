@@ -41,10 +41,7 @@ public class LanguageSource implements IResourcePack, IResourceManagerReloadList
 
     @Override
     public boolean resourceExists(ResourceLocation resourceLocation) {
-        if (resourceLocation.getResourcePath().endsWith(".lang")){
-            return true;
-        }
-        return false;
+        return resourceLocation.getResourcePath().endsWith(".lang");
     }
 
     @Override

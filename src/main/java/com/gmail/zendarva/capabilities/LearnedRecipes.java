@@ -20,11 +20,11 @@ public class LearnedRecipes implements ILearnedRecipes {
 
     @Override
     public void learnResearch(Research research) {
-        researches.add(research.itemToScan.toLowerCase());
+        researches.add(research.researchName);
     }
 
     public boolean knowsResearch(Research research){
-        return researches.stream().anyMatch(f->f.toLowerCase().equals(research.itemToScan.toLowerCase()));
+        return researches.stream().anyMatch(f->f.equals(research.researchName));
     }
 
     @Override

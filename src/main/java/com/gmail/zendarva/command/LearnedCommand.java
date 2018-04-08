@@ -26,16 +26,16 @@ public class LearnedCommand extends CommandBase {
     @Override
     public void execute(MinecraftServer minecraftServer, ICommandSender iCommandSender, String[] strings) throws CommandException {
         if (!strings[0].equals("clear")) {
-            iCommandSender.sendMessage(new TextComponentString("Syntax: /learned clear <player name>"));;
+            iCommandSender.sendMessage(new TextComponentString("Syntax: /learned clear <player name>"));
             return;
         }
         if (strings.length != 2) {
-            iCommandSender.sendMessage(new TextComponentString("Syntax: /learned clear <player name>"));;
+            iCommandSender.sendMessage(new TextComponentString("Syntax: /learned clear <player name>"));
             return;
         }
         EntityPlayer victim = iCommandSender.getEntityWorld().getPlayerEntityByName(strings[1]);
         if (victim == null) {
-            iCommandSender.sendMessage(new TextComponentString("Player not found."));;
+            iCommandSender.sendMessage(new TextComponentString("Player not found."));
             return;
         }
 
@@ -43,11 +43,11 @@ public class LearnedCommand extends CommandBase {
         learned.clear();
 
         if (iCommandSender.getName().equals(victim.getName())){
-            iCommandSender.sendMessage(new TextComponentString("Your learned recipes have been cleared."));;
+            iCommandSender.sendMessage(new TextComponentString("Your learned recipes have been cleared."));
         }
         else{
-            iCommandSender.sendMessage(new TextComponentString("Their learned recipes have been cleared."));;
-            victim.sendMessage(new TextComponentString(iCommandSender.getDisplayName() + " has cleared your learned recipes."));;
+            iCommandSender.sendMessage(new TextComponentString("Their learned recipes have been cleared."));
+            victim.sendMessage(new TextComponentString(iCommandSender.getDisplayName() + " has cleared your learned recipes."));
         }
 
     }

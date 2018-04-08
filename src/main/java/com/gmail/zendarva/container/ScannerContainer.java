@@ -47,7 +47,7 @@ public class ScannerContainer extends Container {
     }
 
     private void addOwnSlots() {
-        IItemHandler itemHandler = this.scanner.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing) null);
+        IItemHandler itemHandler = this.scanner.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
         this.addSlotToContainer(new SlotItemHandler(itemHandler, 0,10,14));
 

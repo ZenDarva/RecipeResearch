@@ -43,7 +43,7 @@ public class LearnedRecipesStorage implements Capability.IStorage<ILearnedRecipe
             if (base instanceof NBTTagString){
                 NBTTagString str = (NBTTagString) base;
                 Optional<Research> research = RecipeResearch.configManager.getResearch(str.getString());
-                research.ifPresent(f->iLearnedRecipes.learnResearch(f));
+                research.ifPresent(iLearnedRecipes::learnResearch);
             }
         }
     }

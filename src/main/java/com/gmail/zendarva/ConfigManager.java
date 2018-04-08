@@ -37,7 +37,7 @@ public class ConfigManager {
             }
         try {
             readFiles(myConfigDir);
-            researchList.stream().forEach(this::verifyResearch);
+            researchList.forEach(this::verifyResearch);
         } catch (IOException e) {
             RecipeResearch.logger.error("Unable to load json config files. {}", e);
         }

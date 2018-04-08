@@ -68,10 +68,7 @@ public class LockableRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements
 
     private boolean playerKnows(EntityPlayer player) {
         ILearnedRecipes learnedRecipes = player.getCapability(LearnedRecipeProvider.learnedRecipesCapability, null);
-        if (learnedRecipes.knowsResearch(lockedBehind)) {
-            return true;
-        }
-        return false;
+        return learnedRecipes.knowsResearch(lockedBehind);
     }
 
     @Override

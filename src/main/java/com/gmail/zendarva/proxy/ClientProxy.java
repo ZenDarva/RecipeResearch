@@ -27,6 +27,7 @@ import java.util.List;
  */
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
+    @SuppressWarnings("MethodCallSideOnly")
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
@@ -36,6 +37,7 @@ public class ClientProxy extends CommonProxy {
         Minecraft.getMinecraft().getLanguageManager().onResourceManagerReload(Minecraft.getMinecraft().getResourceManager());
     }
 
+    @SuppressWarnings("MethodCallSideOnly")
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
@@ -50,7 +52,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public EntityPlayer getPlayer() {
-        EntityPlayer player = Minecraft.getMinecraft().player;
-        return player;
+        return Minecraft.getMinecraft().player;
     }
 }

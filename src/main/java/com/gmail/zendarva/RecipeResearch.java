@@ -53,6 +53,7 @@ public class RecipeResearch {
 
     public RecipeResearch() {
         if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
+            //noinspection MethodCallSideOnly
             registerLanguageHandler();
         }
     }

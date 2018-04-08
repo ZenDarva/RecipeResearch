@@ -45,11 +45,7 @@ public class ResearchItem extends Item {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        ItemStack target = RecipeManager.getStackForName(getMyResearch(stack));
-        if (target.isEmpty()){
-            return "Incomplete Research";
-        }
-        Research research = RecipeManager.getResearchForItem(target);
+        Research research = RecipeManager.getResearchByName(getMyResearch(stack));
         if (research == null){
             return "Damaged Research";
         }
@@ -62,10 +58,8 @@ public class ResearchItem extends Item {
         if (stack.getTagCompound() == null){
             return "Unknown";
         }
-        if (stack.getTagCompound().hasKey("required")){
-
-
-            return stack.getTagCompound().getString("required");
+        if (stack.getTagCompound().hasKey("research")){
+            return stack.getTagCompound().getString("research");
         }
 
         return "Unknown";
@@ -84,7 +78,7 @@ public class ResearchItem extends Item {
         else
             tag = stack.getTagCompound();
 
-        tag.setString("required", research.itemToScan);
+        tag.setString("research", research.researchName);
         stack.setTagCompound(tag);
     }
 
@@ -111,9 +105,8 @@ public class ResearchItem extends Item {
     }
 
     private boolean learnResearch(ItemStack stack, EntityPlayer player){
-        Optional<Research> oResearch = RecipeResearch.configManager.getResearch(getMyResearch(stack));
-        if (oResearch.isPresent()) {
-            Research research = oResearch.get();
+        Research research = RecipeManager.getResearchByName(getMyResearch(stack));
+        if (research != null) {
             ILearnedRecipes learnedRecipes = player.getCapability(LearnedRecipeProvider.learnedRecipesCapability, null);
 
             if (learnedRecipes.knowsResearch(research)){

@@ -90,7 +90,6 @@ public class EntityScanner extends TileEntity implements ITickable {
         if (workingOn.isEmpty() && !inventory.getStackInSlot(0).isEmpty()){
             workingOn = inventory.getStackInSlot(0).copy();
             inventory.setStackInSlot(0, ItemStack.EMPTY);
-            //This should be derived from Research, but that can't be done yet.
             Research research = RecipeManager.getResearchForItem(workingOn);
             if (research != null)
                 maxProgress = research.requiredPower;

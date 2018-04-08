@@ -61,7 +61,14 @@ public class RecipeManager {
         Item item = Item.getByNameOrId(name);
         if (item == null)
             return ItemStack.EMPTY;
-        ItemStack stack = new ItemStack(item);
-        return stack;
+        return new ItemStack(item);
+    }
+
+    public static Research getResearchByName(String myResearch) {
+        for (Research research : RecipeResearch.configManager.researchList) {
+            if (research.researchName.equals(myResearch))
+                return research;
+        }
+        return null;
     }
 }
